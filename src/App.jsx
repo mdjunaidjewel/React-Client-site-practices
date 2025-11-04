@@ -26,6 +26,7 @@ function App() {
       .then(res => res.json())
       .then(data => {
         console.log(data)
+        // This is add and show display user or Read the data or User
         if (data.insertedId) {
           newUser._id = data.insertedId;
           const newUsers = [...users, newUser];
