@@ -34,14 +34,26 @@ function App() {
                   alert("Successfull Add the User in MongoDB");
                   e.target.reset;
                 }
-    })
+      })
 
- }
+  }
+  
+      const handleUserDelete = (id) => {
+        console.log(id);
+        fetch(`http://localhost:3000/users/${id}`, {
+          method:'DELETE'
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log("After Delete DB", data);
+          });
+      };
 
   return (
     <>
       <div>
         <h1>Simple Crud</h1>
+        <h2>Totol Users : { users.length }</h2>
         <form onSubmit={handleAddUser}>
           <input type="text" name="name" placeholder="User Name" /> <br />
           <input type="email" name="email" placeholder="User Email" /> <br />
@@ -49,7 +61,8 @@ function App() {
           <br />
         </form>
         {
-          users.map(user => <p key={user._id}>Name: {user.name} <br /> Email: { user.email}</p>)
+          users.map(user => <div key={user._id}>Name: {user.name} <br /> Email: {user.email} <button onClick={()=> handleUserDelete(user._id)}>
+          Remove</button></div>)
         }
       </div>
     </>
